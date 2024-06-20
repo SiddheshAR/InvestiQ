@@ -5,7 +5,7 @@ export const cardItem = [
     name: "Modules",
     icons: "https://zerodha.com/varsity/wp-content/themes/varsity2/images/ico-modules.svg",
     color: "#77B4F2",
-    link: "/example-link"
+    link: "/modules"
 },
 {
     name: "Live",

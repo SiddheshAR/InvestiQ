@@ -2,9 +2,9 @@ import React from 'react'
 
 const Hero = () => {
   return (
-    <div className=" max-w-7xl my-4 md:my-8 m-auto" >
+    <div className=" max-w-7xl mb-4 md:my-8 m-auto" >
         <div className="flex flex-col lg:flex-row lg:gap-10 p-4">
-            <div className="w-[95%] lg:w-[54%] my-8 flex flex-col gap-3 ">
+            <div className="w-[95%] lg:w-[54%] my-4 flex flex-col gap-3 ">
               <h1 className="heading-mobile md:heading ">Free and Open</h1>
               <h3 className="subHeading-mobile md:subHeading ">
                 Stock market and Financial education
