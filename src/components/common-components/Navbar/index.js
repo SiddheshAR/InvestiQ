@@ -5,22 +5,23 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 const Navbar = () => {
   const [toggle,setToggle]=useState(false);
-  let navElements = ['Modules','Quiz','Videos','Live'];
+  let navElements = ['modules','quiz','videos','live'];
   function toggleHandle(){
     console.log("Toggle Triger")
     setToggle(!toggle);
   }
   return (
     <div className=" max-w-7xl  overflow-x-hidden max-h-[90px] px-3 md:px-6 m-auto flex flex-row justify-between ">
+      <Link href={'/'}>
       <div className="max-w-[150px]">
         <img 
         src={'/logo.png'}
         />
       </div>
-
+      </Link>
       <div className=" flex items-center">
           <ul className="hidden md:flex md:flex-row gap-10 text-lg font-semibold text-gray-800">
-            <li><Link href={''}>Modules</Link></li>
+            <li><Link href={'/modules'}>Modules</Link></li>
             <li><Link href={'/'}>Quiz</Link></li>
             <li><Link href={'/'}>Videos</Link></li>
             <li><Link href={'/'}>Live</Link></li>
@@ -40,7 +41,7 @@ const Navbar = () => {
           
             <ul className=" gap-10 text-lg font-semibold text-center text-gray-800">
               {navElements.map((e)=>{
-                return <li key={e} className="p-2"><Link href={''}>{e}</Link></li>
+                return <li key={e} className="p-2" onClick={()=>setToggle(!toggle)} ><Link href={e} >{e.toUpperCase()}</Link></li>
               })}
             </ul>
         

@@ -11,7 +11,7 @@ const index = ({data}) => {
         <div className="flex flex-col gap-2 mt-2">
           <h4 className="text-gray-600 text-[16px]">{data.chapters}</h4>
           <p className="text-gray-600 text-[14px]">{data.desc}</p>
-          <Link href={'/'}><p className="text-blue-600 cursor-pointer font-semibold text-[17px]" >View Module</p></Link>
+          <Link href={data.path}><p className="text-blue-600 cursor-pointer font-semibold text-[17px]" >View Module</p></Link>
         </div>
     </div>
   )
