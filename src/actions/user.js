@@ -4,6 +4,9 @@ import connectToDB from "@/database";
 import { User } from "@/models/userModel";
 import { redirect } from "next/navigation";
 import {hash} from 'bcryptjs';
+
+
+
 export async function registerSubmit(formSubmit){
 
     let firstName = formSubmit.get('firstname');
