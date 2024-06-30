@@ -2,45 +2,54 @@ import NextAuth, { CredentialsSignin } from "next-auth"
 import GoogleProvider from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
 import connectToDB from "./database";
+import { User } from "./models/userModel";
+import {compare} from "bcryptjs";
+import Github from "next-auth/providers/github"
+import CredentialsProvider from "next-auth/providers/credentials";
+import getUserEmail from "./dummyUsers";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+
+  session:{
+    strategy:'jwt',
+  },  
   providers: [
+    Github({
+        clientId:process.env.GITHUB_CLIENT_ID,
+        clientSecret:process.env.GITHUB_CLIENT_SECRET,
+    }),
     GoogleProvider({
         clientId:process.env.AUTH_GOOGLE_ID,
-        cleintSecret:process.env.AUTH_GOOGLE_SECRET,
+        clientSecret:process.env.AUTH_GOOGLE_SECRET,
     }),
-    Credentials({
-        name:"Credentials",
-        credentials:{
-            email:{
-                label:"Email",
-                type:"email",
-                placeholder:"Enter Email"
-            },
-            password:{
-                label:"Password",
-                type:"password"
-            },
-        },
-        authorize: async (credentials) =>{
+    CredentialsProvider({
+        async authorize(credentials){
+            console.log("Credentials:",credentials);
+            if(credentials === null) return null;
+            try{
+                const user = getUserEmail(credentials?.email);
+                console.log("Acc:",user);
+                if(user){
+                    const isMatch = user?.pass === credentials?.password;
+                    if(isMatch){
+                        console.log("Success.")
+                        return user
+                    }else{
+                        throw new Error("Password not Matched");
+                    }
+                }else{
+                    throw new Error("User not Found");
+                }
 
-            const email = credentials.email 
-            const password = credentials.password
-
-            if(!email || !password ){
-                // throw new CredentialsSignin("Error here man");
-                return("No password no noting")
+            }catch(error){  
+                throw new Error(error);
             }
-            await connectToDB();
-
-            const user = {email,id:"dfd"};
-            if(password !== 'passcode')
-                throw new CredentialsSignin("Password does not match.")
-            else return user;
-        
         }
     })
   ],
+  pages:{
+    signIn:'/login',
+  }
 })
 
 

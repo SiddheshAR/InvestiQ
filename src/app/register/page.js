@@ -27,7 +27,6 @@ const Register = async () => {
               type="text"
               name="firstname"
               className="p-3 border"
-
             />
           </div>
           <div className="flex flex-col ">
